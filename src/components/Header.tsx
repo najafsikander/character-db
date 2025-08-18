@@ -7,7 +7,7 @@ type link ={
 const links:[link] = [
     {
         name:'Rick & Morty',
-        route:'rickMorty'
+        route:'rick-morty'
     }
 ]
 const Header = () => {

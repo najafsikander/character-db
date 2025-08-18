@@ -5,6 +5,7 @@ import { TanstackDevtools } from '@tanstack/react-devtools'
 import Header from '../components/Header'
 
 import appCss from '../styles.css?url'
+import MainLayout from '@/layouts/MainLayout'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -39,7 +40,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Header />
-        {children}
+        <MainLayout>
+          {children}
+        </MainLayout>
         <TanstackDevtools
           config={{
             position: 'bottom-left',
