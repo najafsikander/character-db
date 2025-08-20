@@ -49,19 +49,30 @@ const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
   console.log("DATA: ", data);
 
   return (
-    <section>
+    <>
+      <h1 className="mt-10 mb-3">Rick & Morty Characters</h1>
+      <section className="grid grid-cols-4 gap-x-5 gap-y-10 mt-5">
         {data.results.map((character: character) => (
-          <div key={character.id}>
-            <h1>{character.name}</h1>
+          <div
+            key={character.id}
+            className=" rounded overflow-hidden shadow-2xl"
+          >
+            <img
+              src={character.image}
+              alt="Character Image"
+              className="rounded-t-md w-full"
+            />
+            <h3 className="px-6 pt-2 pb-2 cursor-pointer">{character.name}</h3>
           </div>
         ))}
-        {data.info.prev && (
-          <span onClick={() => setCurrentPage(currentPage - 1)}>Previous</span>
-        )}
-        {data.info.next && (
-          <span onClick={() => setCurrentPage(currentPage + 1)}>Next</span>
-        )}
       </section>
+      <div className="w-screen flex flex-row justify-around px-10 py-2 mt-5 mb-5">
+        <button className={`w-[10rem] border border-white rounded py-1 px-4 ${!data.info.prev ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`} disabled={!data.info.prev} onClick={() => setCurrentPage(currentPage - 1)}>
+              Previous
+        </button>
+          <button className="w-[10rem] cursor-pointer border border-white rounded py-1 px-4" onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+        </div>
+    </>
   );
 };
 
