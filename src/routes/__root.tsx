@@ -1,4 +1,4 @@
-import { ErrorComponent, HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
+import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanstackDevtools } from '@tanstack/react-devtools'
 import type { QueryClient } from '@tanstack/react-query'
@@ -9,6 +9,8 @@ import Header from '../components/Header'
 
 import appCss from '../styles.css?url'
 import MainLayout from '@/layouts/MainLayout'
+import NotFoundComponent from '@/components/404NotFound'
+import ErrorComponent from '@/components/ErrorComponent'
 
 export const Route = createRootRouteWithContext<{queryClient: QueryClient}>()({
   
@@ -33,11 +35,11 @@ export const Route = createRootRouteWithContext<{queryClient: QueryClient}>()({
     ],
   }),
   component: RootComponent,
-  notFoundComponent: () => <div>Error 404 Not Found</div>,
+  notFoundComponent: () => <NotFoundComponent/>,
   errorComponent: (props) => {
     return(
       <RootDocument>
-          <ErrorComponent error={props}/>
+          <ErrorComponent error={props.error} />
       </RootDocument>
     )
   }
