@@ -3,8 +3,8 @@ name = "character-db"
 main = "./.output/server/index.mjs"
 compatibility_date = "2025-04-01"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "./dist"
+pages_build_output_dir = "./.output/public"
 
 [assets]
-binding = "ASSETS"
+binding = "PUBLIC"
 directory = "./.output/public"
