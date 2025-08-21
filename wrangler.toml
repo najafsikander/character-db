@@ -1,10 +1,10 @@
 # wrangler.toml. This file is used to configure the Cloudflare Workers environment for the Character DB application.
 name = "character-db"
-main = "./.output/server/index.mjs"
+# main = "./.output/server/index.mjs"
 compatibility_date = "2025-04-01"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./.output/public"
 
-[assets]
-binding = "PUBLIC"
-directory = "./.output/public"
+# [assets]
+# binding = "PUBLIC"
+# directory = "./.output/public"
