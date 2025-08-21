@@ -63,7 +63,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <MainLayout>
           {children}
         </MainLayout>
-        <TanstackDevtools
+        {
+          import.meta.env.DEV &&
+          <TanstackDevtools
           config={{
             position: 'bottom-left',
           }}
@@ -78,6 +80,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             },
           ]}
         />
+        }
         <Scripts />
       </body>
     </html>

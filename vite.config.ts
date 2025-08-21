@@ -16,6 +16,9 @@ const config = defineConfig({
     }),
     viteReact(),
   ],
+  ssr: {
+    external: ["@tanstack/devtools", "@tanstack/react-query-devtools"]
+  }
 })
 
 export default config
