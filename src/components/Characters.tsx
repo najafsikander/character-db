@@ -1,8 +1,11 @@
 import { useForm } from "@tanstack/react-form";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { z } from "zod";
+
 import FieldInfo from "./FieldInfo";
 import { useState } from "react";
+import { apiResult,character,filters } from "@/types";
+import { FilterSchema } from "@/schemas";
+import { fetchCharacters } from "@/services/rickMorty";
 
 //TODO:REFACTOR & CLEAN THE FILE
 type Props = {
@@ -10,70 +13,8 @@ type Props = {
   setCurrentPage: (page: number) => void;
 };
 
-type info = {
-  count: number;
-  pages: number;
-  next: string;
-  prev: string | null;
-};
-
-type character = {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
-  origin: object;
-  location: object;
-  image: string;
-  episodes: string[];
-  url: string;
-  created: string;
-};
-
-type apiResult = {
-  info: info;
-  results: character[];
-};
-
-const fetchCharacters = async (
-  page = 1,
-  characterName?: string | null,
-  status?: string | null,
-  specie?: string | null,
-  gender?: string | null
-) => {
-  console.log(
-    "Fetching characters for page:",
-    page,
-    "with name:",
-    characterName
-  );
-  const response = await fetch(
-    `https://rickandmortyapi.com/api/character/?page=${page}${
-      characterName ? `&name=${characterName.toLowerCase()}` : ""
-    }${status ? `&status=${status.toLowerCase()}` : ""}${
-      specie ? `&species=${specie.toLowerCase()}` : ""
-    }${gender ? `&gender=${gender.toLowerCase()}` : ""}`
-  );
-  const result: apiResult = await response.json();
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate network delay
-  return result;
-};
-
-const FilterSchema = z.object({
-  name: z.string().min(3, "Name must be at least 3 characters long"),
-  status: z.string(),
-  specie: z.string(),
-  gender: z.string(),
-});
-
 const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
-  const [characterName, setCharacterName] = useState<string | null>(null);
-  const [status, setStatus] = useState<string | null>(null);
-  const [specie, setSpecie] = useState<string | null>(null);
-  const [gender, setGender] = useState<string | null>(null);
+  const [filters, setFilters] = useState<filters>({});
 
   const species: string[] = [
     "Alien",
@@ -103,10 +44,9 @@ const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
     },
     onSubmit: async (values) => {
       console.log("Submitted values: ", values);
-      setCharacterName(values.value.name.trim() || null);
-      setStatus(values.value.status.trim() || null);
-      setSpecie(values.value.specie.trim() || null);
-      setGender(values.value.gender.trim() || null);
+      for(let [key, value] of Object.entries(values.value)){
+        setFilters((filters: filters) => ({...filters, [key]: value.trim() || null}))
+      }
     },
   });
 
@@ -115,13 +55,10 @@ const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
     queryKey: [
       "characters",
       currentPage,
-      characterName,
-      status,
-      specie,
-      gender,
+      filters
     ],
     queryFn: () =>
-      fetchCharacters(currentPage, characterName, status, specie, gender),
+      fetchCharacters(currentPage, filters),
   });
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -131,10 +68,7 @@ const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
   };
 
   const onReset = () => {
-    setCharacterName(null);
-    setStatus(null);
-    setSpecie(null);
-    setGender(null);
+    setFilters({});
     setCurrentPage(1);
     filterForm.reset();
   };
@@ -143,7 +77,7 @@ const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
     <>
       <h1 className="mt-10 mb-3">Rick & Morty Characters</h1>
       {/* Form Area */}
-      <section className="w-full flex flex-row justify-center px-10 py-2 mt-5 mb-5 border border-white rounded">
+      <section className="w-full flex flex-row justify-center mx-10 px-10 py-2 mt-5 mb-5 border border-white rounded">
         <form onSubmit={submitForm} className="w-full">
           {/* Search Character By Name */}
           <div>
