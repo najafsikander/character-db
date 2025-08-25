@@ -4,6 +4,8 @@ export const Route = createFileRoute("/")({
   component: App,
 });
 
+//TODO:RESTRUCTURE PROJECT ACCORDING TO TANSTACK PRODUCTION STANDARDS.
+//TODO:START WORKING ON NEXT DETAILS PAGE.
 function App() {
   return (
     <>
