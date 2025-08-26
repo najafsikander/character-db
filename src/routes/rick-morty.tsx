@@ -1,4 +1,4 @@
-import Characters from "@/components/Characters";
+import Characters from "@/components/CharacterComponents/Characters";
 import GridLoader from "@/components/GridLoader";
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense, useState } from "react";

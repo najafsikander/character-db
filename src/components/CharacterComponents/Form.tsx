@@ -1,22 +1,16 @@
-import { useForm } from "@tanstack/react-form";
-import { useSuspenseQuery } from "@tanstack/react-query";
-
-import FieldInfo from "./FieldInfo";
-import { useState } from "react";
-import { apiResult,character,filters } from "@/types";
 import { FilterSchema } from "@/schemas";
-import { fetchCharacters } from "@/services/rickMorty";
+import { useForm } from "@tanstack/react-form";
+import FieldInfo from "../FieldInfo";
+import { FC } from "react";
+import { filters } from "@/types";
 
-//TODO:REFACTOR & CLEAN THE FILE
 type Props = {
-  currentPage: number;
   setCurrentPage: (page: number) => void;
+  setFilters: (filters: any) => void;
 };
 
-const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
-  const [filters, setFilters] = useState<filters>({});
-
-  const species: string[] = [
+const CharacterForm:FC<Props> = ({setCurrentPage, setFilters}) => {
+const species: string[] = [
     "Alien",
     "Human",
     "Robot",
@@ -50,17 +44,6 @@ const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
     },
   });
 
-  //Fetching Data Here
-  const { data }: { data: apiResult } = useSuspenseQuery({
-    queryKey: [
-      "characters",
-      currentPage,
-      filters
-    ],
-    queryFn: () =>
-      fetchCharacters(currentPage, filters),
-  });
-
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -72,13 +55,9 @@ const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
     setCurrentPage(1);
     filterForm.reset();
   };
-
-  return (
-    <>
-      <h1 className="mt-10 mb-3">Rick & Morty Characters</h1>
-      {/* Form Area */}
-      <section className="w-full flex flex-row justify-center mx-10 px-10 py-2 mt-5 mb-5 border border-white rounded">
-        <form onSubmit={submitForm} className="w-full">
+    return(
+        <>
+        <form onSubmit={submitForm} className="w-full border border-white rounded px-5 py-5">
           {/* Search Character By Name */}
           <div>
             <filterForm.Field
@@ -219,42 +198,8 @@ const Characters: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
             )}
           />
         </form>
-      </section>
+        </>
+    )
+}
 
-      {/* Grid Area To Show Characters */}
-      <section className="grid grid-cols-4 gap-x-5 gap-y-10 mt-5">
-        {data.results.map((character: character) => (
-          <div
-            key={character.id}
-            className=" rounded overflow-hidden shadow-2xl"
-          >
-            <img
-              src={character.image}
-              alt="Character Image"
-              className="rounded-t-md w-full"
-            />
-            <h3 className="px-6 pt-2 pb-2 cursor-pointer">{character.name}</h3>
-          </div>
-        ))}
-      </section>
-      <div className="w-screen flex flex-row justify-around px-10 py-2 mt-5 mb-5">
-        <button
-          className={`w-[10rem] border border-white rounded py-1 px-4 ${!data.info.prev ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          disabled={!data.info.prev}
-          onClick={() => setCurrentPage(currentPage - 1)}
-        >
-          Previous
-        </button>
-        <button
-          className={`w-[10rem] border border-white rounded py-1 px-4 ${!data.info.next ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          disabled={!data.info.next}
-          onClick={() => setCurrentPage(currentPage + 1)}
-        >
-          Next
-        </button>
-      </div>
-    </>
-  );
-};
-
-export default Characters;
+export default CharacterForm;
