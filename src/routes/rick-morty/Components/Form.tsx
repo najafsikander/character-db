@@ -1,6 +1,6 @@
 import { FilterSchema } from "@/schemas";
 import { useForm } from "@tanstack/react-form";
-import FieldInfo from "../FieldInfo";
+import FieldInfo from "../../../components/FieldInfo";
 import { FC } from "react";
 import { filters } from "@/types";
 

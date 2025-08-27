@@ -1,9 +1,9 @@
-import Characters from "@/components/CharacterComponents/Characters";
+import Characters from "@/routes/rick-morty/Components/Characters";
 import GridLoader from "@/components/GridLoader";
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense, useState } from "react";
 
-export const Route = createFileRoute("/rick-morty")({
+export const Route = createFileRoute("/rick-morty/")({
   component: RickMortyPage,
 });
 
