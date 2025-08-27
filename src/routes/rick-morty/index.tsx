@@ -1,5 +1,6 @@
-import Characters from "@/routes/rick-morty/Components/Characters";
+
 import GridLoader from "@/components/GridLoader";
+import Characters from "@/components/pages/rickMorty/Characters";
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense, useState } from "react";
 

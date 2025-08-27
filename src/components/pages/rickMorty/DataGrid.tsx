@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { character } from "@/types";
+import { Link } from "@tanstack/react-router";
 
 type Props = {
     data: any;
@@ -22,7 +23,7 @@ const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage}) => {
               alt="Character Image"
               className="rounded-t-md w-full"
             />
-            <h3 className="px-6 pt-2 pb-2 cursor-pointer">{character.name}</h3>
+            <Link to="/rick-morty/$id" params={{ id: character.id.toString() }}><h3 className="px-6 pt-2 pb-2 cursor-pointer">{character.name}</h3></Link>
           </div>
         ))}
       </section>

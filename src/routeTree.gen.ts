@@ -13,6 +13,7 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RickMortyIndexRouteImport } from './routes/rick-morty/index'
+import { Route as RickMortyIdIndexRouteImport } from './routes/rick-morty/$id/index'
 import { Route as DemoDemoStartServerFuncsRouteImport } from './routes/demo/demo.start.server-funcs'
 import { Route as DemoDemoStartApiRequestRouteImport } from './routes/demo/demo.start.api-request'
 import { ServerRoute as DemoApiDemoNamesServerRouteImport } from './routes/demo/api.demo-names'
@@ -27,6 +28,11 @@ const IndexRoute = IndexRouteImport.update({
 const RickMortyIndexRoute = RickMortyIndexRouteImport.update({
   id: '/rick-morty/',
   path: '/rick-morty/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RickMortyIdIndexRoute = RickMortyIdIndexRouteImport.update({
+  id: '/rick-morty/$id/',
+  path: '/rick-morty/$id/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoDemoStartServerFuncsRoute =
@@ -49,12 +55,14 @@ const DemoApiDemoNamesServerRoute = DemoApiDemoNamesServerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
+  '/rick-morty/$id': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
+  '/rick-morty/$id': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
 }
@@ -62,6 +70,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/rick-morty/': typeof RickMortyIndexRoute
+  '/rick-morty/$id/': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
 }
@@ -70,18 +79,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/rick-morty'
+    | '/rick-morty/$id'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/rick-morty'
+    | '/rick-morty/$id'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
   id:
     | '__root__'
     | '/'
     | '/rick-morty/'
+    | '/rick-morty/$id/'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
   fileRoutesById: FileRoutesById
@@ -89,6 +101,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RickMortyIndexRoute: typeof RickMortyIndexRoute
+  RickMortyIdIndexRoute: typeof RickMortyIdIndexRoute
   DemoDemoStartApiRequestRoute: typeof DemoDemoStartApiRequestRoute
   DemoDemoStartServerFuncsRoute: typeof DemoDemoStartServerFuncsRoute
 }
@@ -130,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RickMortyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rick-morty/$id/': {
+      id: '/rick-morty/$id/'
+      path: '/rick-morty/$id'
+      fullPath: '/rick-morty/$id'
+      preLoaderRoute: typeof RickMortyIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo/demo/start/server-funcs': {
       id: '/demo/demo/start/server-funcs'
       path: '/demo/demo/start/server-funcs'
@@ -161,6 +181,7 @@ declare module '@tanstack/react-start/server' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RickMortyIndexRoute: RickMortyIndexRoute,
+  RickMortyIdIndexRoute: RickMortyIdIndexRoute,
   DemoDemoStartApiRequestRoute: DemoDemoStartApiRequestRoute,
   DemoDemoStartServerFuncsRoute: DemoDemoStartServerFuncsRoute,
 }
