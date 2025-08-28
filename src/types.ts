@@ -12,10 +12,16 @@ export type character = {
   species: string;
   type: string;
   gender: string;
-  origin: object;
-  location: object;
+  origin: {
+    name:string;
+    url:string;
+  };
+  location: {
+    name:string;
+    url:string;
+  };
   image: string;
-  episodes: string[];
+  episode: string[];
   url: string;
   created: string;
 };

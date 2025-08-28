@@ -1,4 +1,4 @@
-import { apiResult, filters } from "@/types";
+import { apiResult, filters, character } from "@/types";
 
 export const fetchCharacters = async (
     page = 1,
@@ -21,6 +21,17 @@ export const fetchCharacters = async (
         return result;
     } catch (err) {
         console.error("Error fetching characters:", err);
+        throw err;
+    }
+};
+
+export const fetchCharacterById = async (id: string) => {
+    try {
+        const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
+        const result:character = await response.json();
+        return result;
+    } catch (err) {
+        console.error("Error fetching character by ID:", err);
         throw err;
     }
 };
