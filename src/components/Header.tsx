@@ -4,10 +4,14 @@ type link ={
     name:string,
     route:string
 }
-const links:[link] = [
+const links:link[] = [
     {
-        name:'Rick & Morty',
-        route:'rick-morty'
+      name:'Rick & Morty',
+      route:'rick-morty'
+    },
+    {
+      name:'Game of Thrones',
+      route:'game-of-thrones'
     }
 ]
 const Header = () => {
@@ -17,7 +21,7 @@ const Header = () => {
         <h3 className="text-slate-900 border-2 border-slate-900 rounded-xl px-2 cursor-pointer">
             <Link to="/">Character-DB</Link>
         </h3>
-        <ul>
+        <ul className='flex gap-3 underline'>
             {links.map((link:link) => <li key={link.name}><Link to={link.route}>{link.name}</Link></li>)}
         </ul>
       </header>

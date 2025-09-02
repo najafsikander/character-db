@@ -47,3 +47,23 @@ export type episode = {
   url: string;
   created: string;
 }
+
+export type got_characters = {
+  id:number;
+  firstName:string;
+  lastName:string;
+  fullName:string;
+  title:string;
+  family:string;
+  image:string;
+  imageUrl:string;
+}
+
+export type continent = {
+  id: number;
+  name: string;
+}
+
+export type got_apiResult = {
+  data: got_characters[];
+}

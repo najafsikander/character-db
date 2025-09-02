@@ -13,6 +13,7 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RickMortyIndexRouteImport } from './routes/rick-morty/index'
+import { Route as GameOfThronesIndexRouteImport } from './routes/game-of-thrones/index'
 import { Route as RickMortyIdIndexRouteImport } from './routes/rick-morty/$id/index'
 import { Route as DemoDemoStartServerFuncsRouteImport } from './routes/demo/demo.start.server-funcs'
 import { Route as DemoDemoStartApiRequestRouteImport } from './routes/demo/demo.start.api-request'
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const RickMortyIndexRoute = RickMortyIndexRouteImport.update({
   id: '/rick-morty/',
   path: '/rick-morty/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GameOfThronesIndexRoute = GameOfThronesIndexRouteImport.update({
+  id: '/game-of-thrones/',
+  path: '/game-of-thrones/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RickMortyIdIndexRoute = RickMortyIdIndexRouteImport.update({
@@ -54,6 +60,7 @@ const DemoApiDemoNamesServerRoute = DemoApiDemoNamesServerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/game-of-thrones': typeof GameOfThronesIndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
@@ -61,6 +68,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/game-of-thrones': typeof GameOfThronesIndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
@@ -69,6 +77,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/game-of-thrones/': typeof GameOfThronesIndexRoute
   '/rick-morty/': typeof RickMortyIndexRoute
   '/rick-morty/$id/': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/game-of-thrones'
     | '/rick-morty'
     | '/rick-morty/$id'
     | '/demo/demo/start/api-request'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/game-of-thrones'
     | '/rick-morty'
     | '/rick-morty/$id'
     | '/demo/demo/start/api-request'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/game-of-thrones/'
     | '/rick-morty/'
     | '/rick-morty/$id/'
     | '/demo/demo/start/api-request'
@@ -100,6 +112,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GameOfThronesIndexRoute: typeof GameOfThronesIndexRoute
   RickMortyIndexRoute: typeof RickMortyIndexRoute
   RickMortyIdIndexRoute: typeof RickMortyIdIndexRoute
   DemoDemoStartApiRequestRoute: typeof DemoDemoStartApiRequestRoute
@@ -143,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RickMortyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/game-of-thrones/': {
+      id: '/game-of-thrones/'
+      path: '/game-of-thrones'
+      fullPath: '/game-of-thrones'
+      preLoaderRoute: typeof GameOfThronesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rick-morty/$id/': {
       id: '/rick-morty/$id/'
       path: '/rick-morty/$id'
@@ -180,6 +200,7 @@ declare module '@tanstack/react-start/server' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GameOfThronesIndexRoute: GameOfThronesIndexRoute,
   RickMortyIndexRoute: RickMortyIndexRoute,
   RickMortyIdIndexRoute: RickMortyIdIndexRoute,
   DemoDemoStartApiRequestRoute: DemoDemoStartApiRequestRoute,
