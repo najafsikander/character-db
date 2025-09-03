@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as RickMortyIndexRouteImport } from './routes/rick-morty/index'
 import { Route as GameOfThronesIndexRouteImport } from './routes/game-of-thrones/index'
 import { Route as RickMortyIdIndexRouteImport } from './routes/rick-morty/$id/index'
+import { Route as GameOfThronesIdIndexRouteImport } from './routes/game-of-thrones/$id/index'
 import { Route as DemoDemoStartServerFuncsRouteImport } from './routes/demo/demo.start.server-funcs'
 import { Route as DemoDemoStartApiRequestRouteImport } from './routes/demo/demo.start.api-request'
 import { ServerRoute as DemoApiDemoNamesServerRouteImport } from './routes/demo/api.demo-names'
@@ -41,6 +42,11 @@ const RickMortyIdIndexRoute = RickMortyIdIndexRouteImport.update({
   path: '/rick-morty/$id/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GameOfThronesIdIndexRoute = GameOfThronesIdIndexRouteImport.update({
+  id: '/game-of-thrones/$id/',
+  path: '/game-of-thrones/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoDemoStartServerFuncsRoute =
   DemoDemoStartServerFuncsRouteImport.update({
     id: '/demo/demo/start/server-funcs',
@@ -62,6 +68,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game-of-thrones': typeof GameOfThronesIndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
+  '/game-of-thrones/$id': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/game-of-thrones': typeof GameOfThronesIndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
+  '/game-of-thrones/$id': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/game-of-thrones/': typeof GameOfThronesIndexRoute
   '/rick-morty/': typeof RickMortyIndexRoute
+  '/game-of-thrones/$id/': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id/': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones'
     | '/rick-morty'
+    | '/game-of-thrones/$id'
     | '/rick-morty/$id'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones'
     | '/rick-morty'
+    | '/game-of-thrones/$id'
     | '/rick-morty/$id'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones/'
     | '/rick-morty/'
+    | '/game-of-thrones/$id/'
     | '/rick-morty/$id/'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
@@ -114,6 +126,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameOfThronesIndexRoute: typeof GameOfThronesIndexRoute
   RickMortyIndexRoute: typeof RickMortyIndexRoute
+  GameOfThronesIdIndexRoute: typeof GameOfThronesIdIndexRoute
   RickMortyIdIndexRoute: typeof RickMortyIdIndexRoute
   DemoDemoStartApiRequestRoute: typeof DemoDemoStartApiRequestRoute
   DemoDemoStartServerFuncsRoute: typeof DemoDemoStartServerFuncsRoute
@@ -170,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RickMortyIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/game-of-thrones/$id/': {
+      id: '/game-of-thrones/$id/'
+      path: '/game-of-thrones/$id'
+      fullPath: '/game-of-thrones/$id'
+      preLoaderRoute: typeof GameOfThronesIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo/demo/start/server-funcs': {
       id: '/demo/demo/start/server-funcs'
       path: '/demo/demo/start/server-funcs'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameOfThronesIndexRoute: GameOfThronesIndexRoute,
   RickMortyIndexRoute: RickMortyIndexRoute,
+  GameOfThronesIdIndexRoute: GameOfThronesIdIndexRoute,
   RickMortyIdIndexRoute: RickMortyIdIndexRoute,
   DemoDemoStartApiRequestRoute: DemoDemoStartApiRequestRoute,
   DemoDemoStartServerFuncsRoute: DemoDemoStartServerFuncsRoute,
