@@ -12,6 +12,10 @@ const links:link[] = [
     {
       name:'Game of Thrones',
       route:'game-of-thrones'
+    },
+    {
+      name:'South Park',
+      route:'south-park'
     }
 ]
 const Header = () => {

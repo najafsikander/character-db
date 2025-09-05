@@ -12,6 +12,7 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SouthParkIndexRouteImport } from './routes/south-park/index'
 import { Route as RickMortyIndexRouteImport } from './routes/rick-morty/index'
 import { Route as GameOfThronesIndexRouteImport } from './routes/game-of-thrones/index'
 import { Route as RickMortyIdIndexRouteImport } from './routes/rick-morty/$id/index'
@@ -25,6 +26,11 @@ const rootServerRouteImport = createServerRootRoute()
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SouthParkIndexRoute = SouthParkIndexRouteImport.update({
+  id: '/south-park/',
+  path: '/south-park/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RickMortyIndexRoute = RickMortyIndexRouteImport.update({
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game-of-thrones': typeof GameOfThronesIndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
+  '/south-park': typeof SouthParkIndexRoute
   '/game-of-thrones/$id': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/game-of-thrones': typeof GameOfThronesIndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
+  '/south-park': typeof SouthParkIndexRoute
   '/game-of-thrones/$id': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/game-of-thrones/': typeof GameOfThronesIndexRoute
   '/rick-morty/': typeof RickMortyIndexRoute
+  '/south-park/': typeof SouthParkIndexRoute
   '/game-of-thrones/$id/': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id/': typeof RickMortyIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones'
     | '/rick-morty'
+    | '/south-park'
     | '/game-of-thrones/$id'
     | '/rick-morty/$id'
     | '/demo/demo/start/api-request'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones'
     | '/rick-morty'
+    | '/south-park'
     | '/game-of-thrones/$id'
     | '/rick-morty/$id'
     | '/demo/demo/start/api-request'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones/'
     | '/rick-morty/'
+    | '/south-park/'
     | '/game-of-thrones/$id/'
     | '/rick-morty/$id/'
     | '/demo/demo/start/api-request'
@@ -126,6 +138,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameOfThronesIndexRoute: typeof GameOfThronesIndexRoute
   RickMortyIndexRoute: typeof RickMortyIndexRoute
+  SouthParkIndexRoute: typeof SouthParkIndexRoute
   GameOfThronesIdIndexRoute: typeof GameOfThronesIdIndexRoute
   RickMortyIdIndexRoute: typeof RickMortyIdIndexRoute
   DemoDemoStartApiRequestRoute: typeof DemoDemoStartApiRequestRoute
@@ -160,6 +173,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/south-park/': {
+      id: '/south-park/'
+      path: '/south-park'
+      fullPath: '/south-park'
+      preLoaderRoute: typeof SouthParkIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rick-morty/': {
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameOfThronesIndexRoute: GameOfThronesIndexRoute,
   RickMortyIndexRoute: RickMortyIndexRoute,
+  SouthParkIndexRoute: SouthParkIndexRoute,
   GameOfThronesIdIndexRoute: GameOfThronesIdIndexRoute,
   RickMortyIdIndexRoute: RickMortyIdIndexRoute,
   DemoDemoStartApiRequestRoute: DemoDemoStartApiRequestRoute,
