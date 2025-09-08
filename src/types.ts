@@ -67,3 +67,40 @@ export type continent = {
 export type got_apiResult = {
   data: got_characters[];
 }
+
+export type showFilterFields = {
+  name: boolean;
+  status: boolean;
+  specie: boolean;
+  gender: boolean;
+}
+
+export type southParkCharacter = {
+  id: number;
+  name: string;
+  gender: string;
+  age: number;
+  hair_color: string;
+  occupation: string;
+  first_appearance: string;
+  image: string;
+}
+
+export type links = {
+  first: string;
+  last: string;
+  next: string;
+  prev: string | null;
+};
+
+export type meta = {
+  current_page: number;
+  from: number;
+  last_page: number;
+}
+
+export type southPark_apiResult = {
+  links: links;
+  meta: meta;
+  results: southParkCharacter[];
+};

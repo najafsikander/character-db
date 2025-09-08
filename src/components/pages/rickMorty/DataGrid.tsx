@@ -9,11 +9,13 @@ type Props = {
 };
 
 const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage}) => {
+
+    console.log("Data in DataGrid: ", data);
     return(
         <>
         {/* Grid Area To Show Characters */}
       <section className="grid grid-cols-4 gap-x-5 gap-y-10 mt-5">
-        {data.results.map((character: character) => (
+        {data.data.map((character: character) => (
           <div
             key={character.id}
             className=" rounded overflow-hidden shadow-2xl"
@@ -29,15 +31,15 @@ const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage}) => {
       </section>
       <div className="w-screen flex flex-row justify-around px-10 py-2 mt-5 mb-5">
         <button
-          className={`w-[10rem] border border-white rounded py-1 px-4 ${!data.info.prev ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          disabled={!data.info.prev}
+          className={`w-[10rem] border border-white rounded py-1 px-4 ${!data.links.prev ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          disabled={!data.links.prev}
           onClick={() => setCurrentPage(currentPage - 1)}
         >
           Previous
         </button>
         <button
-          className={`w-[10rem] border border-white rounded py-1 px-4 ${!data.info.next ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          disabled={!data.info.next}
+          className={`w-[10rem] border border-white rounded py-1 px-4 ${!data.links.next ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          disabled={!data.links.next}
           onClick={() => setCurrentPage(currentPage + 1)}
         >
           Next

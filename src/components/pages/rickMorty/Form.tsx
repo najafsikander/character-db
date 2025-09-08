@@ -2,15 +2,20 @@ import { FilterSchema } from "@/schemas";
 import { useForm } from "@tanstack/react-form";
 import FieldInfo from "../../../components/FieldInfo";
 import { FC } from "react";
-import { filters } from "@/types";
+import { filters, showFilterFields } from "@/types";
 
 type Props = {
   setCurrentPage: (page: number) => void;
   setFilters: (filters: any) => void;
+  displayFilterField: showFilterFields;
 };
 
-const CharacterForm:FC<Props> = ({setCurrentPage, setFilters}) => {
-const species: string[] = [
+const CharacterForm: FC<Props> = ({
+  setCurrentPage,
+  setFilters,
+  displayFilterField,
+}) => {
+  const species: string[] = [
     "Alien",
     "Human",
     "Robot",
@@ -38,8 +43,11 @@ const species: string[] = [
     },
     onSubmit: async (values) => {
       console.log("Submitted values: ", values);
-      for(let [key, value] of Object.entries(values.value)){
-        setFilters((filters: filters) => ({...filters, [key]: value.trim() || null}))
+      for (let [key, value] of Object.entries(values.value)) {
+        setFilters((filters: filters) => ({
+          ...filters,
+          [key]: value.trim() || null,
+        }));
       }
     },
   });
@@ -55,10 +63,14 @@ const species: string[] = [
     setCurrentPage(1);
     filterForm.reset();
   };
-    return(
-        <>
-        <form onSubmit={submitForm} className="w-full border border-white rounded px-5 py-5">
-          {/* Search Character By Name */}
+  return (
+    <>
+      <form
+        onSubmit={submitForm}
+        className="w-full border border-white rounded px-5 py-5"
+      >
+        {/* Search Character By Name */}
+        {displayFilterField.name && (
           <div>
             <filterForm.Field
               name="name"
@@ -82,7 +94,9 @@ const species: string[] = [
               }}
             />
           </div>
-          {/* Search Character By Status */}
+        )}
+        {/* Search Character By Status */}
+        {displayFilterField.status && (
           <div className="mt-3">
             <filterForm.Field
               name="status"
@@ -113,7 +127,9 @@ const species: string[] = [
               }}
             />
           </div>
-          {/* Search Character By Specie */}
+        )}
+        {/* Search Character By Specie */}
+        {displayFilterField.specie && (
           <div className="mt-3">
             <filterForm.Field
               name="specie"
@@ -144,7 +160,9 @@ const species: string[] = [
               }}
             />
           </div>
-          {/* Search Character By Gender */}
+        )}
+        {/* Search Character By Gender */}
+        {displayFilterField.gender && (
           <div className="mt-3">
             <filterForm.Field
               name="gender"
@@ -175,31 +193,32 @@ const species: string[] = [
               }}
             />
           </div>
-          {/* Submission Area */}
-          <filterForm.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
-            children={([canSubmit, isSubmitting]) => (
-              <div className="w-full flex flex-row justify-center gap-3">
-                <button
-                  type="submit"
-                  disabled={!canSubmit}
-                  className="mt-3 border border-gray-300 rounded px-2 py-1 text-sm cursor-pointer hover:bg-white hover:text-black"
-                >
-                  {isSubmitting ? "..." : "Submit"}
-                </button>
-                <button
-                  type="reset"
-                  onClick={onReset}
-                  className="mt-3 border border-gray-300 rounded px-2 py-1 text-sm cursor-pointer hover:bg-white hover:text-black"
-                >
-                  Reset
-                </button>
-              </div>
-            )}
-          />
-        </form>
-        </>
-    )
-}
+        )}
+        {/* Submission Area */}
+        <filterForm.Subscribe
+          selector={(state) => [state.canSubmit, state.isSubmitting]}
+          children={([canSubmit, isSubmitting]) => (
+            <div className="w-full flex flex-row justify-center gap-3">
+              <button
+                type="submit"
+                disabled={!canSubmit}
+                className="mt-3 border border-gray-300 rounded px-2 py-1 text-sm cursor-pointer hover:bg-white hover:text-black"
+              >
+                {isSubmitting ? "..." : "Submit"}
+              </button>
+              <button
+                type="reset"
+                onClick={onReset}
+                className="mt-3 border border-gray-300 rounded px-2 py-1 text-sm cursor-pointer hover:bg-white hover:text-black"
+              >
+                Reset
+              </button>
+            </div>
+          )}
+        />
+      </form>
+    </>
+  );
+};
 
 export default CharacterForm;
