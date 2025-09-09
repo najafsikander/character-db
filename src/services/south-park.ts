@@ -5,7 +5,7 @@ export const fetchCharacters = async (
     filters: filters
 ): Promise<southPark_apiResult> => {
     try {
-        const { name, status, specie, gender } = filters;
+        const { name } = filters;
         console.log(
             "Fetching characters for page:",
             page,
@@ -13,9 +13,8 @@ export const fetchCharacters = async (
             name
         );
         const response = await fetch(
-            `https://spapi.dev/api/characters?page=${page}${name ? `&name=${name.toLowerCase()}` : ""
-            }${status ? `&status=${status.toLowerCase()}` : ""}${specie ? `&species=${specie.toLowerCase()}` : ""
-            }${gender ? `&gender=${gender.toLowerCase()}` : ""}`
+            `https://spapi.dev/api/characters?page=${page}${name ? `&search=${name.toLowerCase()}` : ""
+            }`
         );
         const result: southPark_apiResult = await response.json();
         return result;

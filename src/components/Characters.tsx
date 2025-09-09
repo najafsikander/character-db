@@ -3,19 +3,19 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { useState } from "react";
 import { apiResult,filters, showFilterFields } from "@/types";
-// import { fetchCharacters } from "@/services/rickMorty";
 import CharacterForm from "./pages/rickMorty/Form";
 import DataGrid from "./pages/rickMorty/DataGrid";
 
 type Props = {
   title: string;
+  detailUrl: string;
   currentPage: number;
   setCurrentPage: (page: number) => void;
   fetchCharacters: (page: number, filters: filters) => Promise<any>;
   displayFilterField: showFilterFields;
 };
 
-const Characters: React.FC<Props> = ({ title, currentPage, setCurrentPage, fetchCharacters, displayFilterField }) => {
+const Characters: React.FC<Props> = ({ title, detailUrl, currentPage, setCurrentPage, fetchCharacters, displayFilterField }) => {
   const [filters, setFilters] = useState<filters>({});
 
   
@@ -41,7 +41,7 @@ const Characters: React.FC<Props> = ({ title, currentPage, setCurrentPage, fetch
         <CharacterForm setCurrentPage={setCurrentPage} setFilters={setFilters} displayFilterField={displayFilterField} />
       </section>
 
-      <DataGrid data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <DataGrid detailUrl={detailUrl} data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </>
   );
 };

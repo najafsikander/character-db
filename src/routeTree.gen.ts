@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SouthParkIndexRouteImport } from './routes/south-park/index'
 import { Route as RickMortyIndexRouteImport } from './routes/rick-morty/index'
 import { Route as GameOfThronesIndexRouteImport } from './routes/game-of-thrones/index'
+import { Route as SouthParkIdIndexRouteImport } from './routes/south-park/$id/index'
 import { Route as RickMortyIdIndexRouteImport } from './routes/rick-morty/$id/index'
 import { Route as GameOfThronesIdIndexRouteImport } from './routes/game-of-thrones/$id/index'
 import { Route as DemoDemoStartServerFuncsRouteImport } from './routes/demo/demo.start.server-funcs'
@@ -41,6 +42,11 @@ const RickMortyIndexRoute = RickMortyIndexRouteImport.update({
 const GameOfThronesIndexRoute = GameOfThronesIndexRouteImport.update({
   id: '/game-of-thrones/',
   path: '/game-of-thrones/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SouthParkIdIndexRoute = SouthParkIdIndexRouteImport.update({
+  id: '/south-park/$id/',
+  path: '/south-park/$id/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RickMortyIdIndexRoute = RickMortyIdIndexRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/south-park': typeof SouthParkIndexRoute
   '/game-of-thrones/$id': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
+  '/south-park/$id': typeof SouthParkIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
 }
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/south-park': typeof SouthParkIndexRoute
   '/game-of-thrones/$id': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
+  '/south-park/$id': typeof SouthParkIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
 }
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/south-park/': typeof SouthParkIndexRoute
   '/game-of-thrones/$id/': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id/': typeof RickMortyIdIndexRoute
+  '/south-park/$id/': typeof SouthParkIdIndexRoute
   '/demo/demo/start/api-request': typeof DemoDemoStartApiRequestRoute
   '/demo/demo/start/server-funcs': typeof DemoDemoStartServerFuncsRoute
 }
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/south-park'
     | '/game-of-thrones/$id'
     | '/rick-morty/$id'
+    | '/south-park/$id'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/south-park'
     | '/game-of-thrones/$id'
     | '/rick-morty/$id'
+    | '/south-park/$id'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
   id:
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/south-park/'
     | '/game-of-thrones/$id/'
     | '/rick-morty/$id/'
+    | '/south-park/$id/'
     | '/demo/demo/start/api-request'
     | '/demo/demo/start/server-funcs'
   fileRoutesById: FileRoutesById
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   SouthParkIndexRoute: typeof SouthParkIndexRoute
   GameOfThronesIdIndexRoute: typeof GameOfThronesIdIndexRoute
   RickMortyIdIndexRoute: typeof RickMortyIdIndexRoute
+  SouthParkIdIndexRoute: typeof SouthParkIdIndexRoute
   DemoDemoStartApiRequestRoute: typeof DemoDemoStartApiRequestRoute
   DemoDemoStartServerFuncsRoute: typeof DemoDemoStartServerFuncsRoute
 }
@@ -196,6 +209,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameOfThronesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/south-park/$id/': {
+      id: '/south-park/$id/'
+      path: '/south-park/$id'
+      fullPath: '/south-park/$id'
+      preLoaderRoute: typeof SouthParkIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rick-morty/$id/': {
       id: '/rick-morty/$id/'
       path: '/rick-morty/$id'
@@ -245,6 +265,7 @@ const rootRouteChildren: RootRouteChildren = {
   SouthParkIndexRoute: SouthParkIndexRoute,
   GameOfThronesIdIndexRoute: GameOfThronesIdIndexRoute,
   RickMortyIdIndexRoute: RickMortyIdIndexRoute,
+  SouthParkIdIndexRoute: SouthParkIdIndexRoute,
   DemoDemoStartApiRequestRoute: DemoDemoStartApiRequestRoute,
   DemoDemoStartServerFuncsRoute: DemoDemoStartServerFuncsRoute,
 }

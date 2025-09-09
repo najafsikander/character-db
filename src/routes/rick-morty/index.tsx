@@ -20,7 +20,7 @@ function RickMortyPage() {
   }
   return (
     <Suspense fallback={<GridLoader/>}>
-      <Characters title="Rick & Morty Characters" currentPage={currentPage} setCurrentPage={setCurrentPage} fetchCharacters={fetchCharacters} displayFilterField={displayFilterField} />
+      <Characters title="Rick & Morty Characters" detailUrl="rick-morty" currentPage={currentPage} setCurrentPage={setCurrentPage} fetchCharacters={fetchCharacters} displayFilterField={displayFilterField} />
     </Suspense>
   );
 }

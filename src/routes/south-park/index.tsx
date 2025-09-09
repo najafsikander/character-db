@@ -15,11 +15,11 @@ function SouthPark() {
       name: true,
       status: false,
       specie: false,
-      gender: true
+      gender: false
     }
   return (
     <Suspense fallback={<GridLoader/>}>
-      <Characters title='South Park Characters' currentPage={currentPage} setCurrentPage={setCurrentPage} fetchCharacters={fetchCharacters} displayFilterField={displayFilterField} />
+      <Characters title='South Park Characters' detailUrl='south-park' currentPage={currentPage} setCurrentPage={setCurrentPage} fetchCharacters={fetchCharacters} displayFilterField={displayFilterField} />
     </Suspense>
   )
 }
