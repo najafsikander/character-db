@@ -1,4 +1,4 @@
-import { southPark_apiResult, filters, southParkCharacter} from "@/types";
+import { southPark_apiResult, filters, southParkCharacter, episode} from "@/types";
 
 export const fetchCharacters = async (
     page = 1,
@@ -35,3 +35,16 @@ export const fetchCharacterById = async (id: string):Promise<southParkCharacter>
         throw err;
     }
 };
+
+export const fetchEpisodeByUrl = async (url: string):Promise<episode> => {
+    try {
+        const response = await fetch(url);
+        const result = await response.json();
+        
+        if(result.data) return result.data; // south park api response
+        return result; // rick and morty api response
+    } catch(err) {
+        console.error("Error fetching episode by URL:", err);
+        throw err;
+    }
+}

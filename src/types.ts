@@ -42,10 +42,15 @@ export type episode = {
   id: number;
   name: string;
   air_date: string;
+  season: string;
   episode: string;
   characters: string[];
   url: string;
+  wiki_url: string;
   created: string;
+  created_at: string;
+  description: string;
+  thumbnail_url: string;
 }
 
 export type got_characters = {

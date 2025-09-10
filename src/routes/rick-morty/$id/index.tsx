@@ -1,4 +1,4 @@
-import SingleEpisode from "@/components/pages/rickMorty/Details/SingleEpisode";
+import SingleEpisode from "@/components/SingleEpisode";
 import { fetchCharacterById } from "@/services/rickMorty";
 import { character } from "@/types";
 import { createFileRoute } from "@tanstack/react-router";

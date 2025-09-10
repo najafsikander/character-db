@@ -11,14 +11,18 @@ const SingleEpisode: FC<Props> = ({ url }) => {
     queryFn: () => fetchEpisodeByUrl(url),
   });
 
+  const dateString = data?.created || data?.created_at?.toString() || "";
+
   if (isLoading) return <div>Loading...</div>;
+
+  console.log("Episode data:", data);
   return (
     <section className="w-full mx-auto my-auto flex flex-col shadow-2xl">
       <h1>{data?.name}</h1>
         <div className="flex flex-col gap-3 p-5">
             <h3>Air Date: {data?.air_date}</h3>
             <h3>Episode Code: {data?.episode}</h3>
-            <h3>Created At: {new Date(data?.created || "").toLocaleDateString()}</h3>
+            <h3>Created At: {new Date(dateString).toLocaleDateString()}</h3>
         </div>
     </section>
   );

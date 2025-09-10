@@ -1,6 +1,7 @@
 import { character, southParkCharacter } from "@/types";
 import { FC } from "react";
 import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
+import SingleEpisode from "./SingleEpisode";
 
 type Props = {
   character: any;
@@ -17,6 +18,8 @@ const CharacterDetails: FC<Props> = ({ character }) => {
   const deadIcon = (
     <span className="text-[20px] drop-shadow-lg drop-shadow-red-300">🔴</span>
   );
+
+  const episodes: string[] = character.episode || character.episodes || [];
 
   const getEpisodesCount = (character: any) => {
     if (character.episode) return character.episode.length;
@@ -85,6 +88,18 @@ const CharacterDetails: FC<Props> = ({ character }) => {
           </section>
         </div>
       </section>
+
+      {/* Display Episodes */}
+      <section className="w-[60%] rounded mx-auto my-10 flex flex-col shadow-2xl">
+          <h1>Episodes list</h1>
+          <section className="flex flex-col gap-3 p-5">
+            {episodes.map((ep, index) => (
+              <div key={index}>
+                <SingleEpisode url={ep}/>
+              </div>
+            ))}
+          </section>
+        </section>
     </>
   );
 };
