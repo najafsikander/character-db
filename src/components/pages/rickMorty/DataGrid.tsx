@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { character } from "@/types";
+import { character, southParkCharacter } from "@/types";
 import { Link } from "@tanstack/react-router";
 
 type Props = {
@@ -22,13 +22,13 @@ const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage,detailUrl}) => {
         <>
         {/* Grid Area To Show Characters */}
       <section className="grid grid-cols-4 gap-x-5 gap-y-10 mt-5 mx-10">
-        {items.map((character: character) => (
+        {items.map((character: character & southParkCharacter) => (
           <div
             key={character.id}
             className=" rounded overflow-hidden shadow-2xl"
           >
             <img
-              src={character.image ? character.image : (character.gender === "Male" ? maleAvatar : femaleAvatar)}
+              src={character.image ? character.image : ((character.gender === "Male" || character.sex === "Male") ? maleAvatar : femaleAvatar)}
               alt="Character Image"
               className="rounded-t-md w-full"
             />

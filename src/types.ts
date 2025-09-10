@@ -78,7 +78,7 @@ export type showFilterFields = {
 export type southParkCharacter = {
   id: number;
   name: string;
-  gender: string;
+  sex: string;
   age: number;
   hair_color: string;
   occupation: string;

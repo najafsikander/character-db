@@ -1,4 +1,4 @@
-import { southPark_apiResult, filters} from "@/types";
+import { southPark_apiResult, filters, southParkCharacter} from "@/types";
 
 export const fetchCharacters = async (
     page = 1,
@@ -20,6 +20,18 @@ export const fetchCharacters = async (
         return result;
     } catch (err) {
         console.error("Error fetching characters:", err);
+        throw err;
+    }
+};
+
+export const fetchCharacterById = async (id: string):Promise<southParkCharacter> => {
+    try {
+        const response = await fetch(`https://spapi.dev/api/characters/${id}`);
+        const result:any = await response.json();
+        const character:southParkCharacter = result.data;
+        return character;
+    } catch (err) {
+        console.error("Error fetching character by ID:", err);
         throw err;
     }
 };
