@@ -16,17 +16,17 @@ function App() {
       <section className="flex w-[30%] justify-evenly mt-5">
         <img
           src="/images/rickMorty.jpg"
-          alt="rick and morty avatar"
+          alt="Rick and morty avatar"
           className="w-30 rounded-[60%]"
         />
         <img
-          src="/images/rickMorty.jpg"
-          alt="rick and morty avatar"
+          src="/images/got.jpg"
+          alt="Game of thrones avatar"
           className="w-30 rounded-[60%]"
         />
         <img
-          src="/images/rickMorty.jpg"
-          alt="rick and morty avatar"
+          src="/images/southpark.jpg"
+          alt="South park avatar"
           className="w-30 rounded-[60%]"
         />
         <img

@@ -1,4 +1,4 @@
-import { fetchEpisodeByUrl } from "@/services/rickMorty";
+import { fetchEpisodeByUrl } from "@/services/common";
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 
@@ -30,12 +30,12 @@ const SingleEpisode: FC<Props> = ({ url }) => {
       )}
       <h1>{data?.name}</h1>
       <div className="flex flex-col gap-3 p-5">
-        <p>{data?.description}</p>
+        {data?.description && <p>{data?.description}</p>}
         <h3>Air Date: {data?.air_date}</h3>
-        <h3>Season: {data?.season}</h3>
+        {data?.season && <h3>Season: {data?.season}</h3>}
         <h3>Episode Code: {data?.episode}</h3>
         <h3>Created At: {new Date(dateString).toLocaleDateString()}</h3>
-        <h3>Wiki Url: <a href={data?.wiki_url} target="_blank" rel="noopener noreferrer">Click Here</a></h3>
+        {data?.wiki_url && (<h3>Wiki Url: <a href={data?.wiki_url} target="_blank" rel="noopener noreferrer">Click Here</a></h3>)}
       </div>
     </section>
   );

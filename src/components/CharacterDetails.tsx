@@ -1,4 +1,3 @@
-import { character, southParkCharacter } from "@/types";
 import { FC } from "react";
 import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 import SingleEpisode from "./SingleEpisode";

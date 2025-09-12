@@ -3,8 +3,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { useState } from "react";
 import { apiResult,filters, showFilterFields } from "@/types";
-import CharacterForm from "./pages/rickMorty/Form";
-import DataGrid from "./pages/rickMorty/DataGrid";
+import CharacterForm from "./Form";
+import DataGrid from "./DataGrid";
 
 type Props = {
   title: string;
