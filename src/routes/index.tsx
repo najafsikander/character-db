@@ -4,7 +4,7 @@ export const Route = createFileRoute("/")({
   component: App,
 });
 
-//TODO:ABSTRACT CHARACTERS, DATA GRID & FORM COMPONENTS SO THEY CAN BE USED IN MULTIPLE MEDIA SOURCES.
+//TODO: ADD A NEW MEDIA SOURCE
 function App() {
   return (
     <>
