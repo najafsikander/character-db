@@ -109,3 +109,24 @@ export type southPark_apiResult = {
   meta: meta;
   results: southParkCharacter[];
 };
+
+export type simpsonsCharacter = {
+  id: number;
+  age: number;
+  birthdate: string;
+  gender: string;
+  name: string;
+  occupation: string;
+  hair_color: string;
+  portrait_path: string;
+  status: string;
+  phrases: string[];
+}
+
+export type simpsons_apiResult = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  pages: number;
+  results: simpsonsCharacter[];
+};

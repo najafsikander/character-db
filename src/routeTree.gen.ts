@@ -13,6 +13,7 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SouthParkIndexRouteImport } from './routes/south-park/index'
+import { Route as SimpsonsIndexRouteImport } from './routes/simpsons/index'
 import { Route as RickMortyIndexRouteImport } from './routes/rick-morty/index'
 import { Route as GameOfThronesIndexRouteImport } from './routes/game-of-thrones/index'
 import { Route as SouthParkIdIndexRouteImport } from './routes/south-park/$id/index'
@@ -32,6 +33,11 @@ const IndexRoute = IndexRouteImport.update({
 const SouthParkIndexRoute = SouthParkIndexRouteImport.update({
   id: '/south-park/',
   path: '/south-park/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimpsonsIndexRoute = SimpsonsIndexRouteImport.update({
+  id: '/simpsons/',
+  path: '/simpsons/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RickMortyIndexRoute = RickMortyIndexRouteImport.update({
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game-of-thrones': typeof GameOfThronesIndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
+  '/simpsons': typeof SimpsonsIndexRoute
   '/south-park': typeof SouthParkIndexRoute
   '/game-of-thrones/$id': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/game-of-thrones': typeof GameOfThronesIndexRoute
   '/rick-morty': typeof RickMortyIndexRoute
+  '/simpsons': typeof SimpsonsIndexRoute
   '/south-park': typeof SouthParkIndexRoute
   '/game-of-thrones/$id': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id': typeof RickMortyIdIndexRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/game-of-thrones/': typeof GameOfThronesIndexRoute
   '/rick-morty/': typeof RickMortyIndexRoute
+  '/simpsons/': typeof SimpsonsIndexRoute
   '/south-park/': typeof SouthParkIndexRoute
   '/game-of-thrones/$id/': typeof GameOfThronesIdIndexRoute
   '/rick-morty/$id/': typeof RickMortyIdIndexRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones'
     | '/rick-morty'
+    | '/simpsons'
     | '/south-park'
     | '/game-of-thrones/$id'
     | '/rick-morty/$id'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones'
     | '/rick-morty'
+    | '/simpsons'
     | '/south-park'
     | '/game-of-thrones/$id'
     | '/rick-morty/$id'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game-of-thrones/'
     | '/rick-morty/'
+    | '/simpsons/'
     | '/south-park/'
     | '/game-of-thrones/$id/'
     | '/rick-morty/$id/'
@@ -150,6 +162,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameOfThronesIndexRoute: typeof GameOfThronesIndexRoute
   RickMortyIndexRoute: typeof RickMortyIndexRoute
+  SimpsonsIndexRoute: typeof SimpsonsIndexRoute
   SouthParkIndexRoute: typeof SouthParkIndexRoute
   GameOfThronesIdIndexRoute: typeof GameOfThronesIdIndexRoute
   RickMortyIdIndexRoute: typeof RickMortyIdIndexRoute
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/south-park'
       fullPath: '/south-park'
       preLoaderRoute: typeof SouthParkIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simpsons/': {
+      id: '/simpsons/'
+      path: '/simpsons'
+      fullPath: '/simpsons'
+      preLoaderRoute: typeof SimpsonsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rick-morty/': {
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameOfThronesIndexRoute: GameOfThronesIndexRoute,
   RickMortyIndexRoute: RickMortyIndexRoute,
+  SimpsonsIndexRoute: SimpsonsIndexRoute,
   SouthParkIndexRoute: SouthParkIndexRoute,
   GameOfThronesIdIndexRoute: GameOfThronesIdIndexRoute,
   RickMortyIdIndexRoute: RickMortyIdIndexRoute,

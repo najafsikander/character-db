@@ -16,6 +16,10 @@ const links:link[] = [
     {
       name:'South Park',
       route:'south-park'
+    },
+    {
+      name:'Simpsons',
+      route:'simpsons'
     }
 ]
 const Header = () => {

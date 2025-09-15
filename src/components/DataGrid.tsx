@@ -14,7 +14,9 @@ const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage,detailUrl}) => {
   const maleAvatar:string = "https://cdn5.vectorstock.com/i/1000x1000/98/49/avatar-men-icon-on-a-white-background-vector-31979849.jpg";
   const femaleAvatar:string = "https://www.kindpng.com/picc/m/378-3783625_avatar-woman-blank-avatar-icon-female-hd-png.png";
   const items = data.data || data.results;
-  const links = data.links || data.info;
+  const next:string = data.next;
+  const prev:string = data.prev;
+  const links = data.links || data.info  || {next,prev};
   const finalDetailUrl = `/${detailUrl}/$id`;
 
     console.log("Data in DataGrid: ", data, items);
