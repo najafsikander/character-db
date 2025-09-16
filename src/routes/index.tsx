@@ -4,7 +4,7 @@ export const Route = createFileRoute("/")({
   component: App,
 });
 
-//TODO: ADD A NEW MEDIA SOURCE
+//TODO: ADDED A NEW MEDIA SOURCE. REFACTOR THE CODE TO MAKE IT MORE DYNAMIC AND LESS REPETITIVE
 function App() {
   return (
     <>
