@@ -20,6 +20,14 @@ const CharacterDetails: FC<Props> = ({ character }) => {
 
   const episodes: string[] = character.episode || character.episodes || [];
 
+  const getImageUrl = (character: any): string => {
+    if (character.image) return character.image;
+    if (character.portrait_path)
+      return `https://cdn.thesimpsonsapi.com/500${character.portrait_path}`;
+    if (character.gender === "Male") return maleAvatar;
+    return femaleAvatar;
+  };
+
   const getEpisodesCount = (character: any) => {
     if (character.episode) return character.episode.length;
     if (character.episodes) return character.episodes.length;
@@ -32,13 +40,7 @@ const CharacterDetails: FC<Props> = ({ character }) => {
       <section className="w-[60%] border border-white rounded mx-auto my-10 flex shadow-2xl">
         <div className="flex-1">
           <img
-            src={
-              character.image
-                ? character.image
-                : character.sex === "Male"
-                  ? maleAvatar
-                  : femaleAvatar
-            }
+            src={getImageUrl(character)}
             alt={character.name}
             className="rounded-tl-md rounded-bl-md w-full h-full"
           />
@@ -58,6 +60,12 @@ const CharacterDetails: FC<Props> = ({ character }) => {
                 {character.status &&
                   (character.status === "Alive" ? aliveIcon : deadIcon)}
               </div>
+              {/* Birthdate */}
+              {character.birthdate && (
+                <h3>Birthdate: {new Date(character.birthdate).toLocaleDateString()}</h3>
+              )}
+              {/* Age */}
+              {character.age && <h3>Age: {character.age}</h3>}
               {/* Species */}
               {character.species && <h3>Species: {character.species}</h3>}
               {/* Origin */}
@@ -69,36 +77,48 @@ const CharacterDetails: FC<Props> = ({ character }) => {
                 <h3>Location: {character.location?.name.toString() || ""}</h3>
               )}
               {/* Hair Color */}
-              {character.hair_color && <h3>Hair Color: {character.hair_color}</h3>}
+              {character.hair_color && (
+                <h3>Hair Color: {character.hair_color}</h3>
+              )}
               {/* Religion */}
               {character.religion && <h3>Religion: {character.religion}</h3>}
               {/* Occupation */}
-              {character.occupation && <h3>Occupation: {character.occupation}</h3>}
+              {character.occupation && (
+                <h3>Occupation: {character.occupation}</h3>
+              )}
               {/* Episodes Count */}
-              <h3>Episodes: {getEpisodesCount(character)}</h3>
+              {
+                character.episode || character.episodes &&
+                <h3>Episodes: {getEpisodesCount(character)}</h3>
+              }
               {/* Created At */}
-              <h3>
-                Created At:{" "}
-                {new Date(
-                  character.created || character.created_at
-                ).toLocaleDateString()}
-              </h3>
+              {character.created && character.created_at && (
+                <h3>
+                  Created At:{" "}
+                  {new Date(
+                    character.created || character.created_at
+                  ).toLocaleDateString()}
+                </h3>
+              )}
             </div>
           </section>
         </div>
       </section>
 
       {/* Display Episodes */}
-      <section className="w-[60%] rounded mx-auto my-10 flex flex-col shadow-2xl">
-          <h1>Episodes list</h1>
-          <section className="flex flex-col gap-3 p-5">
-            {episodes.map((ep, index) => (
-              <div key={index}>
-                <SingleEpisode url={ep}/>
-              </div>
-            ))}
-          </section>
+      {
+        episodes.length > 0 &&
+        <section className="w-[60%] rounded mx-auto my-10 flex flex-col shadow-2xl">
+        <h1>Episodes list</h1>
+        <section className="flex flex-col gap-3 p-5">
+          {episodes.map((ep, index) => (
+            <div key={index}>
+              <SingleEpisode url={ep} />
+            </div>
+          ))}
         </section>
+      </section>
+      }
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { character, southParkCharacter } from "@/types";
+import { character, simpsonsCharacter, southParkCharacter } from "@/types";
 import { Link } from "@tanstack/react-router";
 
 type Props = {
@@ -20,6 +20,14 @@ const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage,detailUrl}) => {
   const finalDetailUrl = `/${detailUrl}/$id`;
 
     console.log("Data in DataGrid: ", data, items);
+    
+    const getImageUrl = (character: any): string => {
+      if(character.image) return character.image;
+      if(character.portrait_path) return `https://cdn.thesimpsonsapi.com/500${character.portrait_path}`;
+      if(character.gender === 'Male') return maleAvatar;
+      return femaleAvatar;
+    }
+    
     return(
         <>
         {/* Grid Area To Show Characters */}
@@ -30,7 +38,7 @@ const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage,detailUrl}) => {
             className=" rounded overflow-hidden shadow-2xl"
           >
             <img
-              src={character.image ? character.image : ((character.gender === "Male" || character.sex === "Male") ? maleAvatar : femaleAvatar)}
+              src={getImageUrl(character)}
               alt="Character Image"
               className="rounded-t-md w-full"
             />
