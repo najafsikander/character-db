@@ -11,11 +11,12 @@ type Props = {
   detailUrl: string;
   currentPage: number;
   setCurrentPage: (page: number) => void;
+  showForm: boolean;
   fetchCharacters: (page: number, filters: filters) => Promise<any>;
   displayFilterField: showFilterFields;
 };
 
-const Characters: React.FC<Props> = ({ title, detailUrl, currentPage, setCurrentPage, fetchCharacters, displayFilterField }) => {
+const Characters: React.FC<Props> = ({ title, detailUrl, currentPage, setCurrentPage, showForm = true, fetchCharacters, displayFilterField }) => {
   const [filters, setFilters] = useState<filters>({});
 
   
@@ -37,9 +38,11 @@ const Characters: React.FC<Props> = ({ title, detailUrl, currentPage, setCurrent
     <>
       <h1 className="mt-10 mb-3">{title}</h1>
       {/* Form Area */}
+      { showForm &&
       <section className="w-full flex flex-row justify-center mx-10 px-10 py-2 mt-5 mb-5">
         <CharacterForm setCurrentPage={setCurrentPage} setFilters={setFilters} displayFilterField={displayFilterField} />
       </section>
+      }
 
       <DataGrid detailUrl={detailUrl} data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </>

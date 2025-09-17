@@ -30,8 +30,8 @@ function App() {
           className="w-30 rounded-[60%]"
         />
         <img
-          src="/images/rickMorty.jpg"
-          alt="rick and morty avatar"
+          src="/images/simpsons.webp"
+          alt="Simpsons avatar"
           className="w-30 rounded-[60%]"
         />
       </section>

@@ -17,9 +17,10 @@ function SimpsonsPage() {
         specie: false,
         gender: false
       }
+    const showForm:boolean = false;
   return (
     <Suspense fallback={<GridLoader/>}>
-      <Characters title='Simpsons Characters' detailUrl='simpsons' currentPage={currentPage} setCurrentPage={setCurrentPage} fetchCharacters={fetchCharacters} displayFilterField={displayFilterField} />
+      <Characters title='Simpsons Characters' detailUrl='simpsons' currentPage={currentPage} setCurrentPage={setCurrentPage} showForm={showForm} fetchCharacters={fetchCharacters} displayFilterField={displayFilterField} />
     </Suspense>
   )
 }
