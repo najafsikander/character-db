@@ -1,11 +1,11 @@
 import CharacterDetails from '@/components/CharacterDetails';
 import { fetchCharacterById } from '@/services/south-park';
-import { southParkCharacter } from '@/types';
+import { character } from '@/types';
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/south-park/$id/')({
   loader: async ({params: {id}}) => {
-    const character:southParkCharacter = await fetchCharacterById(id);
+    const character:character = await fetchCharacterById(id);
     return { id, character };
   },
   component: SingleCharacter,

@@ -1,10 +1,10 @@
 import { fetchCharacterById } from "@/services/game-of-thrones";
-import { got_characters } from "@/types";
+import { character } from "@/types";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/game-of-thrones/$id/")({
   loader: async ({ params: { id } }) => {
-    const character: got_characters = await fetchCharacterById(id);
+    const character: character = await fetchCharacterById(id);
     return { id, character };
   },
   component: SingleCharacter,

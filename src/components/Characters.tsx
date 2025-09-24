@@ -11,7 +11,7 @@ type Props = {
   detailUrl: string;
   currentPage: number;
   setCurrentPage: (page: number) => void;
-  showForm: boolean;
+  showForm?: boolean;
   fetchCharacters: (page: number, filters: filters) => Promise<any>;
   displayFilterField: showFilterFields;
 };

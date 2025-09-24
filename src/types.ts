@@ -5,31 +5,31 @@ export type info = {
   prev: string | null;
 };
 
-export type character = {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
-  origin: {
-    name:string;
-    url:string;
-  };
-  location: {
-    name:string;
-    url:string;
-  };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
-};
+// export type character = {
+//   id: number;
+//   name: string;
+//   status: string;
+//   species: string;
+//   type: string;
+//   gender: string;
+//   origin: {
+//     name:string;
+//     url:string;
+//   };
+//   location: {
+//     name:string;
+//     url:string;
+//   };
+//   image: string;
+//   episode: string[];
+//   url: string;
+//   created: string;
+// };
 
-export type apiResult = {
-  info: info;
-  results: character[];
-};
+// export type apiResult = {
+//   info: info;
+//   results: character[];
+// };
 
 export type filters = {
     name?: string | null,
@@ -53,25 +53,25 @@ export type episode = {
   thumbnail_url: string;
 }
 
-export type got_characters = {
-  id:number;
-  firstName:string;
-  lastName:string;
-  fullName:string;
-  title:string;
-  family:string;
-  image:string;
-  imageUrl:string;
-}
+// export type got_characters = {
+//   id:number;
+//   firstName:string;
+//   lastName:string;
+//   fullName:string;
+//   title:string;
+//   family:string;
+//   image:string;
+//   imageUrl:string;
+// }
 
 export type continent = {
   id: number;
   name: string;
 }
 
-export type got_apiResult = {
-  data: got_characters[];
-}
+// export type got_apiResult = {
+//   data: got_characters[];
+// }
 
 export type showFilterFields = {
   name: boolean;
@@ -80,16 +80,16 @@ export type showFilterFields = {
   gender: boolean;
 }
 
-export type southParkCharacter = {
-  id: number;
-  name: string;
-  sex: string;
-  age: number;
-  hair_color: string;
-  occupation: string;
-  first_appearance: string;
-  image: string;
-}
+// export type southParkCharacter = {
+//   id: number;
+//   name: string;
+//   sex: string;
+//   age: number;
+//   hair_color: string;
+//   occupation: string;
+//   first_appearance: string;
+//   image: string;
+// }
 
 export type links = {
   first: string;
@@ -104,29 +104,81 @@ export type meta = {
   last_page: number;
 }
 
-export type southPark_apiResult = {
-  links: links;
-  meta: meta;
-  results: southParkCharacter[];
+// export type southPark_apiResult = {
+//   links: links;
+//   meta: meta;
+//   results: southParkCharacter[];
+// };
+
+// export type simpsonsCharacter = {
+//   id: number;
+//   age: number;
+//   birthdate: string;
+//   gender: string;
+//   name: string;
+//   occupation: string;
+//   hair_color: string;
+//   portrait_path: string;
+//   status: string;
+//   phrases: string[];
+// }
+
+// export type simpsons_apiResult = {
+//   count: number;
+//   next: string | null;
+//   previous: string | null;
+//   pages: number;
+//   results: simpsonsCharacter[];
+// };
+
+
+export type character = {
+  id: number;
+  name: string;
+  status: string;
+  species: string;
+  type: string;
+  gender: string;
+  origin: {
+    name:string;
+    url:string;
+  };
+  location: {
+    name:string;
+    url:string;
+  };
+  image: string;
+  episode: string[];
+  episodes: string[];
+  url: string;
+  created: string;
+  firstName:string;
+  lastName:string;
+  fullName:string;
+  title:string;
+  family:string;
+  imageUrl:string;
+  sex: string;
+  age: number;
+  hair_color: string;
+  occupation: string;
+  first_appearance: string;
+  birthdate: string;
+  portrait_path: string;
+  phrases: string[];
+  religion: string;
+  created_at: string;
 };
 
-export type simpsonsCharacter = {
-  id: number;
-  age: number;
-  birthdate: string;
-  gender: string;
-  name: string;
-  occupation: string;
-  hair_color: string;
-  portrait_path: string;
-  status: string;
-  phrases: string[];
-}
 
-export type simpsons_apiResult = {
+export type apiResult = {
+  info: info;
+  results: character[];
+  data: character[];
+  links: links;
+  meta: meta;
   count: number;
   next: string | null;
   previous: string | null;
   pages: number;
-  results: simpsonsCharacter[];
 };

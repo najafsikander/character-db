@@ -1,5 +1,5 @@
 import { FC } from "react";
-import {  got_characters } from "@/types";
+import {  character } from "@/types";
 import { Link } from "@tanstack/react-router";
 
 type Props = {
@@ -11,7 +11,7 @@ const DataGrid:FC<Props> = ({data}) => {
         <>
         {/* Grid Area To Show Characters */}
       <section className="grid grid-cols-4 gap-x-5 gap-y-10 mt-5 mx-10">
-        {data.map((character: got_characters) => (
+        {data.map((character: character) => (
           <div
             key={character.id}
             className=" rounded overflow-hidden shadow-2xl"

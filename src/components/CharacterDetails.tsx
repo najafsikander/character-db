@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 import SingleEpisode from "./SingleEpisode";
+import { character } from "@/types";
 
 type Props = {
-  character: any;
+  character: character;
 };
 const CharacterDetails: FC<Props> = ({ character }) => {
   const maleAvatar: string =
@@ -20,15 +21,16 @@ const CharacterDetails: FC<Props> = ({ character }) => {
 
   const episodes: string[] = character.episode || character.episodes || [];
 
-  const getImageUrl = (character: any): string => {
+  const getImageUrl = (character: character): string => {
     if (character.image) return character.image;
     if (character.portrait_path)
       return `https://cdn.thesimpsonsapi.com/500${character.portrait_path}`;
-    if (character.gender === "Male") return maleAvatar;
+    console.log("character: ", character.gender,character.sex);
+    if (character.gender === "Male" || character.sex === "Male") return maleAvatar;
     return femaleAvatar;
   };
 
-  const getEpisodesCount = (character: any) => {
+  const getEpisodesCount = (character: character) => {
     if (character.episode) return character.episode.length;
     if (character.episodes) return character.episodes.length;
     return 0;

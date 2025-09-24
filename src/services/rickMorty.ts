@@ -1,4 +1,4 @@
-import { apiResult, filters, character, episode } from "@/types";
+import { apiResult, filters, character } from "@/types";
 
 export const fetchCharacters = async (
     page = 1,

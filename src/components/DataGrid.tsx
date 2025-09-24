@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { character, simpsonsCharacter, southParkCharacter } from "@/types";
+import { character } from "@/types";
 import { Link } from "@tanstack/react-router";
 
 type Props = {
@@ -21,10 +21,10 @@ const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage,detailUrl}) => {
 
     console.log("Data in DataGrid: ", data, items);
     
-    const getImageUrl = (character: any): string => {
+    const getImageUrl = (character: character): string => {
       if(character.image) return character.image;
       if(character.portrait_path) return `https://cdn.thesimpsonsapi.com/500${character.portrait_path}`;
-      if(character.gender === 'Male') return maleAvatar;
+      if(character.gender === 'Male' || character.sex === 'Male') return maleAvatar;
       return femaleAvatar;
     }
     
@@ -32,7 +32,7 @@ const DataGrid:FC<Props> = ({data,currentPage,setCurrentPage,detailUrl}) => {
         <>
         {/* Grid Area To Show Characters */}
       <section className="grid grid-cols-4 gap-x-5 gap-y-10 mt-5 mx-10">
-        {items.map((character: character & southParkCharacter) => (
+        {items.map((character: character) => (
           <div
             key={character.id}
             className=" rounded overflow-hidden shadow-2xl"
