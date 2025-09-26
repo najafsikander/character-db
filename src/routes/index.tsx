@@ -4,7 +4,7 @@ export const Route = createFileRoute("/")({
   component: App,
 });
 
-//TODO:Remove unnecessary types and imports and clean up the code
+//TODO:Make App Mobile Responsive
 function App() {
   return (
     <>
